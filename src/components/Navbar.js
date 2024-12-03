@@ -8,7 +8,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="nav-brand">
-        <Link to="/">ARTIST NAME</Link>
+        <Link to="/">Angel Antonio</Link>
       </div>
       <div className={`nav-menu ${isOpen ? 'active' : ''}`}>
         <Link to="/" className="nav-item">Home</Link>

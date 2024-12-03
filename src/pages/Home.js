@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <div className="home">
       <div className="hero">
-        <h1>ARTIST NAME</h1>
+        <h1>Angel Antonio</h1>
         <p>Singer | Songwriter | Performer</p>
         <button className="cta-button">Listen Now</button>
       </div>
