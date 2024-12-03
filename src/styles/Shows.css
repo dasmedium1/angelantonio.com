@@ -1,0 +1,68 @@
+.shows-page {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.shows-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.show-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.date {
+  text-align: center;
+  min-width: 80px;
+}
+
+.day {
+  display: block;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ff3366;
+}
+
+.month {
+  display: block;
+  color: #ff3366;
+}
+
+.show-info {
+  flex: 1;
+}
+
+.venue {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.location {
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 0.5rem;
+}
+
+.ticket-button {
+  background: #ff3366;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 0.5rem;
+}
+
+.ticket-button:hover {
+  background: #ff4477;
+}

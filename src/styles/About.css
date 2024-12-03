@@ -1,0 +1,46 @@
+.about-page {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.about-content {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.artist-image {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.bio {
+  flex: 1;
+  min-width: 300px;
+}
+
+.bio h1 {
+  color: #ff3366;
+  margin-bottom: 1rem;
+}
+
+.bio p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .about-content {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .artist-image {
+    width: 100%;
+    max-width: 300px;
+  }
+}
