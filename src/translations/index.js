@@ -3,9 +3,15 @@ export const translations = {
     nav: {
       home: 'Home',
       music: 'Music',
-      shows: 'Shows',
+      shows: 'Live',
       about: 'About',
       contact: 'Contact'
+    },
+    live: {
+      title: 'Stay Updated',
+      description: 'Subscribe to our newsletter for exclusive updates, tour dates, and special announcements.',
+      emailPlaceholder: 'Enter your email',
+      signupButton: 'Sign Up'
     },
     home: {
       tourText: 'Zeit Tour 2024',
@@ -19,9 +25,15 @@ export const translations = {
     nav: {
       home: 'Inicio',
       music: 'Música',
-      shows: 'Conciertos',
+      shows: 'Live',
       about: 'Sobre Mí',
       contact: 'Contacto'
+    },
+    live: {
+      title: 'Mantente Informado',
+      description: 'Suscríbete a nuestro boletín para recibir actualizaciones exclusivas, fechas de gira y anuncios especiales.',
+      emailPlaceholder: 'Ingresa tu email',
+      signupButton: 'Suscribirse'
     },
     home: {
       tourText: 'Gira Zeit 2024',

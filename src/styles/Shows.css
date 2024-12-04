@@ -1,68 +1,73 @@
-.shows-page {
+.live-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 2rem;
-  max-width: 1200px;
+}
+
+.newsletter-container {
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 3rem;
+  border-radius: 10px;
+}
+
+.newsletter-container h1 {
+  margin-bottom: 1.5rem;
+  color: #ff3366;
+}
+
+.newsletter-container p {
+  margin-bottom: 2rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.newsletter-form {
+  display: flex;
+  gap: 1rem;
+  max-width: 400px;
   margin: 0 auto;
 }
 
-.shows-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
-.show-card {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 1.5rem;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-.date {
-  text-align: center;
-  min-width: 80px;
-}
-
-.day {
-  display: block;
-  font-size: 2rem;
-  font-weight: bold;
-  color: #ff3366;
-}
-
-.month {
-  display: block;
-  color: #ff3366;
-}
-
-.show-info {
+.newsletter-form input {
   flex: 1;
-}
-
-.venue {
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-}
-
-.location {
-  color: rgba(255, 255, 255, 0.7);
-  margin-bottom: 0.5rem;
-}
-
-.ticket-button {
-  background: #ff3366;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
   color: white;
-  padding: 0.5rem 1rem;
+  font-family: inherit;
+}
+
+.newsletter-form input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.newsletter-form button {
+  padding: 1rem 2rem;
+  background: #ff3366;
   border: none;
   border-radius: 5px;
+  color: white;
   cursor: pointer;
-  text-decoration: none;
-  display: inline-block;
-  margin-top: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: background-color 0.3s ease;
 }
 
-.ticket-button:hover {
+.newsletter-form button:hover {
   background: #ff4477;
+}
+
+@media (max-width: 480px) {
+  .newsletter-form {
+    flex-direction: column;
+  }
+  
+  .newsletter-form button {
+    width: 100%;
+  }
 }

@@ -4,7 +4,7 @@ import { LanguageProvider } from './context/LanguageContext';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Music from './pages/Music';
-import Shows from './pages/Shows';
+import Live from './pages/Live';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import './styles/App.css';
@@ -18,7 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/music" element={<Music />} />
-          <Route path="/shows" element={<Shows />} />
+          <Route path="/shows" element={<Live />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>

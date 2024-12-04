@@ -1,26 +1,38 @@
-import React from 'react';
-import '../styles/Shows.css';
+import React, { useState, useContext } from 'react';
+import { LanguageContext } from '../context/LanguageContext';
+import { translations } from '../translations';
+import '../styles/Live.css';
 
-const Shows = () => {
+const Live = () => {
+  const [email, setEmail] = useState('');
+  const { language } = useContext(LanguageContext);
+  const t = translations[language].live;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Add newsletter signup logic here
+    console.log('Newsletter signup:', email);
+    setEmail('');
+  };
+
   return (
-    <div className="shows-page">
-      <h1>Upcoming Shows</h1>
-      <div className="shows-container">
-        <div className="show-card">
-          <div className="date">
-            <span className="day">15</span>
-            <span className="month">DEC</span>
-          </div>
-          <div className="show-info">
-            <h3>Venue Name</h3>
-            <p>City, Country</p>
-            <button className="ticket-button">Get Tickets</button>
-          </div>
-        </div>
-        {/* Add more show cards as needed */}
+    <div className="live-page">
+      <div className="newsletter-container">
+        <h1>{t.title}</h1>
+        <p>{t.description}</p>
+        <form onSubmit={handleSubmit} className="newsletter-form">
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder={t.emailPlaceholder}
+            required
+          />
+          <button type="submit">{t.signupButton}</button>
+        </form>
       </div>
     </div>
   );
 };
 
-export default Shows;
+export default Live;
