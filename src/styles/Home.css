@@ -10,37 +10,50 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('../images/hero-bg.JPG');
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../images/hero-bg.JPG');
   background-size: cover;
   background-position: center;
   text-align: center;
+  position: relative;
 }
 
 .hero h1 {
-  font-size: 4rem;
+  font-size: 6rem;
   margin-bottom: 1rem;
-  color: #ff3366;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  color: #ffffff;
+  text-shadow: 0 0 20px rgba(255,255,255,0.5);
+  font-weight: 700;
+  letter-spacing: 12px;
 }
 
 .hero p {
-  font-size: 1.5rem;
-  margin-bottom: 2rem;
+  font-size: 1.8rem;
+  margin-bottom: 3rem;
+  letter-spacing: 6px;
 }
 
 .cta-button {
-  padding: 1rem 2rem;
-  font-size: 1.2rem;
-  background-color: #ff3366;
-  border: none;
+  padding: 1.5rem 4rem;
+  font-size: 1.4rem;
+  background-color: transparent;
+  border: 2px solid #ffffff;
   color: white;
-  border-radius: 30px;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  position: relative;
+  overflow: hidden;
 }
 
 .cta-button:hover {
-  transform: scale(1.05);
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.nav-item:hover {
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(255,255,255,0.8);
 }
 
 .latest-release, .upcoming-shows {

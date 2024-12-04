@@ -6,8 +6,8 @@ const Home = () => {
     <div className="home">
       <div className="hero">
         <h1>Angel Antonio</h1>
-        <p>Singer | Songwriter | Performer</p>
-        <button className="cta-button">Listen Now</button>
+        <p>Zeit Tour 2024</p>
+        <button className="cta-button">Tickets</button>
       </div>
       
       <div className="latest-release">
