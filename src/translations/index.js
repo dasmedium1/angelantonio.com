@@ -2,7 +2,7 @@ export const translations = {
   en: {
     nav: {
       home: 'Home',
-      music: 'Music',
+      history: 'History',
       shows: 'Live',
       about: 'About',
       contact: 'Contact'
@@ -25,7 +25,7 @@ export const translations = {
   es: {
     nav: {
       home: 'Inicio',
-      music: 'Música',
+      history: 'Historia',
       shows: 'Live',
       about: 'Sobre Mí',
       contact: 'Contacto'

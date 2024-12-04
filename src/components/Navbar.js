@@ -31,7 +31,7 @@ const Navbar = () => {
         </div>
         <div className={`nav-menu ${isOpen ? 'active' : ''}`}>
           <Link to="/" className="nav-item">{t.home}</Link>
-          <Link to="/music" className="nav-item">{t.music}</Link>
+          <Link to="/history" className="nav-item">{t.history}</Link>
           <Link to="/shows" className="nav-item">{t.shows}</Link>
           <Link to="/about" className="nav-item">{t.about}</Link>
           <Link to="/contact" className="nav-item">{t.contact}</Link>
