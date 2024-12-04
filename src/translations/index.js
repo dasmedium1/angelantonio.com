@@ -8,10 +8,11 @@ export const translations = {
       contact: 'Contact'
     },
     live: {
-      title: 'Stay Updated',
       description: 'Sign up to the Angel Antonio newsletter and never miss any announcements',
       emailPlaceholder: 'E-mail address',
-      signupButton: '→'
+      signupButton: '→',
+      privacyConsent: 'I agree to the',
+      privacyPolicy: 'Privacy Policy'
     },
     home: {
       tourText: 'Zeit Tour 2024',
@@ -30,10 +31,11 @@ export const translations = {
       contact: 'Contacto'
     },
     live: {
-      title: 'Mantente Informado',
       description: 'Suscríbete al boletín de Angel Antonio y no te pierdas ningún anuncio',
       emailPlaceholder: 'E-mail address',
-      signupButton: '→'
+      signupButton: '→',
+      privacyConsent: 'Acepto la',
+      privacyPolicy: 'Política de Privacidad'
     },
     home: {
       tourText: 'Gira Zeit 2024',
