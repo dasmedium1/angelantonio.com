@@ -49,6 +49,7 @@
 .timeline-event.left {
   left: 0;
   padding-right: 50px;
+  text-align: right;
 }
 
 .timeline-event.right {
@@ -113,6 +114,7 @@
   .timeline-event.right {
     left: 0;
     padding-right: 20px;
+    text-align: left;
   }
 
 }
