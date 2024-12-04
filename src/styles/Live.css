@@ -1,78 +1,5 @@
 .live-page {
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-}
-
-.newsletter-container {
-  max-width: 600px;
-  width: 100%;
-  text-align: center;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 3rem;
-  border-radius: 10px;
-}
-
-.newsletter-container h1 {
-  margin-bottom: 1.5rem;
-  color: #ff3366;
-}
-
-.newsletter-container p {
-  margin-bottom: 2rem;
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.newsletter-form {
-  display: flex;
-  gap: 1rem;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.newsletter-form input {
-  flex: 1;
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 5px;
-  color: white;
-  font-family: inherit;
-}
-
-.newsletter-form input::placeholder {
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.newsletter-form button {
-  padding: 1rem 2rem;
-  background: #ff3366;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: background-color 0.3s ease;
-}
-
-.newsletter-form button:hover {
-  background: #ff4477;
-}
-
-@media (max-width: 480px) {
-  .newsletter-form {
-    flex-direction: column;
-  }
-  
-  .newsletter-form button {
-    width: 100%;
-  }
-}
-.live-page {
-  min-height: 100vh;
   padding-top: 80px;
   background: transparent;
 }
@@ -81,7 +8,7 @@
   position: fixed;
   top: 100px;
   left: 20px;
-  max-width: 400px;
+  width: 600px;
   padding: 20px;
   background: rgba(0, 0, 0, 0.5);
   border-radius: 8px;
@@ -152,5 +79,6 @@
   .newsletter-container {
     position: static;
     margin: 20px auto;
+    width: 90%;
   }
 }
