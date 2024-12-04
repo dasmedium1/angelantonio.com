@@ -1,6 +1,6 @@
 .navbar {
   background-color: rgba(0, 0, 0, 0.9);
-  padding: 1.5rem 2rem;
+  padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -9,6 +9,21 @@
   top: 0;
   z-index: 1000;
   border-bottom: 1px solid #333;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-logo {
+  height: 40px;
+}
+
+.logo-image {
+  height: 100%;
+  width: auto;
 }
 
 .nav-brand a {
@@ -22,6 +37,41 @@
 .nav-menu {
   display: flex;
   gap: 2rem;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-links a {
+  color: #ffffff;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: #ff3366;
+}
+
+.language-selector {
+  background-color: transparent;
+  border: 1px solid #333;
+  color: #ffffff;
+  padding: 0.5rem;
+  font-family: 'Roboto Condensed', sans-serif;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.language-selector option {
+  background-color: #000000;
 }
 
 .nav-item {

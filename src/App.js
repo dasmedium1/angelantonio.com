@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { LanguageProvider } from './context/LanguageContext';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Music from './pages/Music';
@@ -10,8 +11,9 @@ import './styles/App.css';
 
 function App() {
   return (
-    <Router>
-      <div className="App">
+    <LanguageProvider>
+      <Router>
+        <div className="App">
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -20,8 +22,9 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
-      </div>
-    </Router>
+        </div>
+      </Router>
+    </LanguageProvider>
   );
 }
 
