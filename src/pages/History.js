@@ -32,12 +32,12 @@ const History = () => {
       <div className="timeline-container">
         <div className="timeline-line"></div>
         {timelineEvents.map((event, index) => (
-          <div 
-            key={index} 
-            className={`timeline-event ${event.isLeft ? 'left' : 'right'}`}
-          >
-            <div className="timeline-content">
-              <h2 className="year">{event.year}</h2>
+          <div key={index}>
+            <div className="year-marker">
+              {event.year}
+            </div>
+            <div className={`timeline-event ${event.isLeft ? 'left' : 'right'}`}>
+              <div className="timeline-content">
               <div className="event-details">
                 <h3>{event.title}</h3>
                 <p>{event.description}</p>
