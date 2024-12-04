@@ -38,12 +38,13 @@ const History = () => {
             </div>
             <div className={`timeline-event ${event.isLeft ? 'left' : 'right'}`}>
               <div className="timeline-content">
-              <div className="event-details">
-                <h3>{event.title}</h3>
-                <p>{event.description}</p>
-              </div>
-              <div className="event-media">
-                <img src={event.image} alt={event.title} />
+                <div className="event-details">
+                  <h3>{event.title}</h3>
+                  <p>{event.description}</p>
+                </div>
+                <div className="event-media">
+                  <img src={event.image} alt={event.title} />
+                </div>
               </div>
             </div>
           </div>
