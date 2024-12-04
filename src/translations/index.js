@@ -9,7 +9,7 @@ export const translations = {
     },
     live: {
       title: 'Stay Updated',
-      description: 'Subscribe to our newsletter for exclusive updates, tour dates, and special announcements.',
+      description: 'Sign up to the Angel Antonio newsletter and never miss any announcements',
       emailPlaceholder: 'Enter your email',
       signupButton: 'Sign Up'
     },
@@ -31,7 +31,7 @@ export const translations = {
     },
     live: {
       title: 'Mantente Informado',
-      description: 'Suscríbete a nuestro boletín para recibir actualizaciones exclusivas, fechas de gira y anuncios especiales.',
+      description: 'Suscríbete al boletín de Angel Antonio y no te pierdas ningún anuncio',
       emailPlaceholder: 'Ingresa tu email',
       signupButton: 'Suscribirse'
     },
