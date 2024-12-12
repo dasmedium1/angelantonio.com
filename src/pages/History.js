@@ -1,31 +1,35 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/History.css';
 
 const History = () => {
-  const timelineEvents = [
-    {
-      year: 2024,
-      title: "Zeit Tour",
-      description: "World tour across 15 countries",
-      image: "/images/zeit-tour.jpg",
-      isLeft: true
-    },
-    {
-      year: 2023,
-      title: "Album Release - 'Echoes'",
-      description: "Third studio album featuring collaborations with...",
-      image: "/images/echoes-album.jpg",
-      isLeft: false
-    },
-    {
-      year: 2022,
-      title: "Music Video - 'Darkness'",
-      description: "Award-winning music video directed by...",
-      image: "/images/darkness-video.jpg",
-      isLeft: true
-    },
-    // Add more timeline events as needed
-  ];
+  const [timelineEvents, setTimelineEvents] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchTimelineData = async () => {
+      try {
+        const response = await fetch('/data/timeline.json');
+        if (!response.ok) {
+          throw new Error('Failed to fetch timeline data');
+        }
+        const data = await response.json();
+        setTimelineEvents(data.timelineEvents);
+      } catch (err) {
+        setError(err.message);
+        console.error('Error loading timeline data:', err);
+      }
+    };
+
+    fetchTimelineData();
+  }, []);
+
+  if (error) {
+    return <div className="error-message">Error loading timeline: {error}</div>;
+  }
+
+  if (!timelineEvents.length) {
+    return <div className="loading">Loading timeline...</div>;
+  }
 
   return (
     <div className="history-page">
