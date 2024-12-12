@@ -9,7 +9,7 @@ const History = () => {
   useEffect(() => {
     const handleScroll = () => {
       const events = document.querySelectorAll('.timeline-event');
-      const scrollPosition = window.scrollY + 120; // Match the CSS top position
+      const scrollPosition = window.scrollY + 180; // Match the CSS top position
 
       events.forEach((event) => {
         const eventPosition = event.offsetTop;
