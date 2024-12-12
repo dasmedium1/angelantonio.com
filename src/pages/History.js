@@ -8,7 +8,11 @@ const History = () => {
   useEffect(() => {
     const fetchTimelineData = async () => {
       try {
-        const response = await fetch(process.env.PUBLIC_URL + '/data/timeline.json');
+        // In development, use the source file directly
+        const jsonPath = process.env.NODE_ENV === 'development' 
+          ? '/src/data/timeline.json'
+          : process.env.PUBLIC_URL + '/data/timeline.json';
+        const response = await fetch(jsonPath);
         if (!response.ok) {
           throw new Error('Failed to fetch timeline data');
         }
