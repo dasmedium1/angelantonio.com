@@ -13,6 +13,7 @@
     "react-scripts": "5.0.1"
   },
   "scripts": {
+    "prestart": "if not exist public\\data mkdir public\\data && copy src\\data\\timeline.json public\\data\\timeline.json",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
