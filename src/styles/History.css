@@ -24,8 +24,8 @@
 .floating-year-marker {
   position: fixed;
   left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  top: 120px;
+  transform: translateX(-50%);
   background: #000000;
   padding: 10px;
   border: 2px solid #ff3366;
@@ -112,7 +112,8 @@
     width: 60px;
     height: 60px;
     font-size: 1rem;
-    transform: translate(0, -50%);
+    transform: translateX(0);
+    top: 100px;
   }
 
   .timeline-event {
