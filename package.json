@@ -13,9 +13,7 @@
     "react-scripts": "5.0.1"
   },
   "scripts": {
-    "prestart": "if not exist public\\data mkdir public\\data && copy /Y src\\data\\timeline.json public\\data\\timeline.json && echo Timeline file copied successfully",
     "start": "react-scripts start",
-    "prebuild": "if not exist public\\data mkdir public\\data && copy /Y src\\data\\timeline.json public\\data\\timeline.json",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
