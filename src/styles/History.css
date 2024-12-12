@@ -21,10 +21,11 @@
   top: 0;
 }
 
-.year-marker {
-  position: absolute;
+.floating-year-marker {
+  position: fixed;
   left: 50%;
-  transform: translateX(-50%);
+  top: 50%;
+  transform: translate(-50%, -50%);
   background: #000000;
   padding: 10px;
   border: 2px solid #ff3366;
@@ -37,7 +38,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2;
+  z-index: 1000;
+  transition: all 0.3s ease;
 }
 
 .timeline-event {
@@ -105,11 +107,12 @@
     left: 20px;
   }
 
-  .year-marker {
+  .floating-year-marker {
     left: 20px;
     width: 60px;
     height: 60px;
     font-size: 1rem;
+    transform: translate(0, -50%);
   }
 
   .timeline-event {

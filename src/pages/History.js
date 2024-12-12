@@ -4,6 +4,25 @@ import '../styles/History.css';
 const History = () => {
   const [timelineEvents, setTimelineEvents] = useState([]);
   const [error, setError] = useState(null);
+  const [currentYear, setCurrentYear] = useState('');
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const events = document.querySelectorAll('.timeline-event');
+      const scrollPosition = window.scrollY + window.innerHeight / 2;
+
+      events.forEach((event) => {
+        const eventPosition = event.offsetTop;
+        if (eventPosition <= scrollPosition) {
+          const year = event.getAttribute('data-year');
+          setCurrentYear(year);
+        }
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     const fetchTimelineData = async () => {
@@ -48,12 +67,12 @@ const History = () => {
     <div className="history-page">
       <div className="timeline-container">
         <div className="timeline-line"></div>
+        <div className="floating-year-marker">
+          <span>{currentYear}</span>
+        </div>
         {timelineEvents.map((event, index) => (
           <div key={index}>
-            <div className="year-marker">
-              {event.year}
-            </div>
-            <div className={`timeline-event ${event.isLeft ? 'left' : 'right'}`}>
+            <div className={`timeline-event ${event.isLeft ? 'left' : 'right'}`} data-year={event.year}>
               <div className="timeline-content">
                 <div className="event-details">
                   <h3>{event.title}</h3>
