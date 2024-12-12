@@ -9,6 +9,7 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 40px 20px;
+  padding-bottom: 300px; /* Add extra space at the bottom */
 }
 
 .timeline-line {
