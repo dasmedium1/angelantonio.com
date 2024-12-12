@@ -9,15 +9,22 @@ const History = () => {
   useEffect(() => {
     const handleScroll = () => {
       const events = document.querySelectorAll('.timeline-event');
-      const scrollPosition = window.scrollY + window.innerHeight - 180; // Adjust to capture last item
+      const markerPosition = 180; // Match the CSS top position
+      const scrollPosition = window.scrollY + markerPosition;
 
+      let currentEventYear = '';
       events.forEach((event) => {
-        const eventPosition = event.offsetTop;
-        if (eventPosition <= scrollPosition) {
-          const year = event.getAttribute('data-year');
-          setCurrentYear(year);
+        const eventTop = event.offsetTop;
+        const eventBottom = eventTop + event.offsetHeight;
+        
+        if (scrollPosition >= eventTop && scrollPosition <= eventBottom) {
+          currentEventYear = event.getAttribute('data-year');
         }
       });
+
+      if (currentEventYear) {
+        setCurrentYear(currentEventYear);
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
