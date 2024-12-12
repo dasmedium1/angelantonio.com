@@ -7,8 +7,10 @@ const History = () => {
 
   useEffect(() => {
     const fetchTimelineData = async () => {
+      // Add cache-busting query parameter
+      const timestamp = new Date().getTime();
       try {
-        const response = await fetch('/data/timeline.json');
+        const response = await fetch(`/data/timeline.json?t=${timestamp}`);
         if (!response.ok) {
           throw new Error('Failed to fetch timeline data');
         }
@@ -21,6 +23,16 @@ const History = () => {
     };
 
     fetchTimelineData();
+    
+    // Refresh every 5 seconds in development mode
+    let interval;
+    if (process.env.NODE_ENV === 'development') {
+      interval = setInterval(fetchTimelineData, 5000);
+    }
+
+    return () => {
+      if (interval) clearInterval(interval);
+    };
   }, []);
 
   if (error) {
