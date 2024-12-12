@@ -9,6 +9,7 @@ const History = () => {
     const fetchTimelineData = async () => {
       // Add cache-busting query parameter
       const timestamp = new Date().getTime();
+      console.log('Fetching timeline data...');
       try {
         const response = await fetch(`/data/timeline.json?t=${timestamp}`);
         if (!response.ok) {
