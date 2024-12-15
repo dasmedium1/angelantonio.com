@@ -24,6 +24,11 @@ services:
     volumes:
       - pocketbase_data:/pb/pb_data
       - pb_config:/pb/pb-config
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "http://localhost:8090/api/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
 
 volumes:
   pocketbase_data:
