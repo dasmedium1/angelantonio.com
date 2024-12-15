@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { pb } from '../lib/pocketbase';
 import '../styles/History.css';
 
 const History = () => {
