@@ -53,91 +53,32 @@ const Admin = () => {
     setMessage('');
 
     try {
-      // Validate raw input first
-      if (!formData.title_field.trim() || !formData.year_field || !formData.desc_field.trim() || !formData.img_field.trim()) {
+      // Basic validation
+      if (!formData.title_field || !formData.year_field || !formData.desc_field || !formData.img_field) {
         throw new Error('All fields are required');
       }
 
-      // Validate year format
       const yearNum = parseInt(formData.year_field, 10);
       if (isNaN(yearNum) || yearNum < 1900 || yearNum > 2100) {
         throw new Error('Please enter a valid year between 1900 and 2100');
       }
 
-      // Additional validation logging
-      console.log('Validated form data:', formData);
-
-      // Prepare data for submission
-      const submissionData = {
-        title_field: formData.title_field.trim(),
-        year_field: yearNum,
-        desc_field: formData.desc_field.trim(),
-        img_field: formData.img_field.trim(),
-        pos_field: Boolean(formData.pos_field)
+      // Create the event data object
+      const eventData = {
+        title: formData.title_field.trim(),
+        year: yearNum,
+        description: formData.desc_field.trim(),
+        image: formData.img_field.trim(),
+        isLeft: formData.pos_field
       };
 
-      console.log('Submission data:', submissionData);
+      console.log('Attempting to create event with data:', eventData);
 
-      // Attempt to create record with enhanced error handling
-      try {
-        // First verify the connection
-        const isConnected = await checkConnection();
-        if (!isConnected) {
-          throw new Error('Database connection is not available');
-        }
-
-        // Log the actual request
-        console.log('Attempting to create record with data:', submissionData);
-        
-        const record = await pb.collection('timeline_events').create(submissionData);
-        console.log('Record created successfully:', record);
-      } catch (createError) {
-        console.error('Create record error:', createError);
-        
-        // Enhanced error detection
-        if (createError.status === 401) {
-          throw new Error('Authentication expired - please log in again');
-        }
-        
-        if (createError.status === 403) {
-          throw new Error('You do not have permission to create records');
-        }
-
-        // Enhanced error handling for various response formats
-        if (createError.response?.data) {
-          const errorDetails = Object.entries(createError.response.data)
-            .map(([field, errors]) => {
-              // Handle both array and string error messages
-              const errorMsg = Array.isArray(errors) ? errors.join(', ') : errors;
-              return `${field}: ${errorMsg}`;
-            })
-            .join('; ');
-          throw new Error(`Validation failed - ${errorDetails}`);
-        }
-
-        // Check for specific error types
-        if (createError.status === 400) {
-          throw new Error('Invalid data provided - please check your input');
-        }
-
-        // Detailed fallback error message
-        const errorMessage = 
-          createError.message || 
-          createError.response?.message ||
-          createError.data?.message ||
-          'Failed to create record - please try again';
-        
-        console.error('Detailed error:', {
-          message: errorMessage,
-          status: createError.status,
-          data: createError.data,
-          response: createError.response
-        });
-        
-        throw new Error(errorMessage);
-      }
+      // Create the record
+      const record = await pb.collection('timeline_events').create(eventData);
+      console.log('Event created successfully:', record);
       
-      setMessage('Event added successfully!');
+      // Clear form and show success message
       setFormData({
         title_field: '',
         year_field: '',
@@ -145,19 +86,10 @@ const Admin = () => {
         img_field: '',
         pos_field: false
       });
+      setMessage('Event added successfully!');
     } catch (error) {
-      console.error('Error details:', {
-        message: error.message,
-        data: error.data,
-        status: error.status,
-        response: error.response
-      });
-      const errorMsg = error.message || 'Unknown error occurred';
-      console.error('Form submission error:', {
-        message: errorMsg,
-        originalError: error
-      });
-      setMessage('Error adding event: ' + errorMsg);
+      console.error('Error creating event:', error);
+      setMessage('Error: ' + (error.message || 'Failed to create event'));
     } finally {
       setIsLoading(false);
     }
