@@ -14,11 +14,16 @@ const Login = () => {
     console.log('Login attempt with email:', email);
     console.log('PocketBase URL:', process.env.REACT_APP_POCKETBASE_URL);
     try {
-      const authData = await pb.admins.authWithPassword(email, password);
+      const authData = await pb.collection('users').authWithPassword(email, password);
       console.log('Login successful:', authData);
       navigate('/admin');
     } catch (err) {
       console.error('Login failed:', err);
+      console.error('Error details:', {
+        status: err.status,
+        data: err.data,
+        url: err.url
+      });
       setError(`Login failed: ${err.message}`);
     }
   };
