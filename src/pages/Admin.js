@@ -52,22 +52,32 @@ const Admin = () => {
         throw new Error('Please enter a valid year between 1900 and 2100');
       }
 
-      // Format data to match PocketBase schema field names
+      // Format data to match PocketBase schema field names and field IDs
       const formattedData = {
-        title: formData.title.trim(),
-        year: yearNum,
-        description: formData.description.trim(),
-        image: formData.image.trim(),
-        isLeft: Boolean(formData.isLeft)
+        title_field: formData.title.trim(),
+        year_field: yearNum,
+        desc_field: formData.description.trim(),
+        img_field: formData.image.trim(),
+        pos_field: Boolean(formData.isLeft)
       };
 
       // Additional validation logging
       console.log('Validated form data:', formData);
       console.log('Formatted data for PocketBase:', formattedData);
 
-      console.log('Sending data to PocketBase:', formattedData);
-      
-      const record = await pb.collection('timeline_events').create(formattedData);
+      // Attempt to create record with detailed error handling
+      try {
+        const record = await pb.collection('timeline_events').create(formattedData);
+        console.log('Record created successfully:', record);
+      } catch (createError) {
+        console.error('Detailed create error:', {
+          message: createError.message,
+          data: createError.data,
+          originalError: createError.originalError,
+          response: createError.response
+        });
+        throw createError;
+      }
       console.log('Record created:', record);
       
       setMessage('Event added successfully!');
