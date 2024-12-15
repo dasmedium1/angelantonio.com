@@ -1,0 +1,17 @@
+FROM alpine:3.18
+
+WORKDIR /pb
+
+RUN apk add --no-cache \
+    unzip \
+    ca-certificates \
+    wget
+
+# Download and install PocketBase
+RUN wget https://github.com/pocketbase/pocketbase/releases/download/v0.19.4/pocketbase_0.19.4_linux_amd64.zip \
+    && unzip pocketbase_0.19.4_linux_amd64.zip \
+    && rm pocketbase_0.19.4_linux_amd64.zip
+
+EXPOSE 8090
+
+CMD ["./pocketbase", "serve", "--http=0.0.0.0:8090"]
