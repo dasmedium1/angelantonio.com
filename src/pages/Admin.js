@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { pb } from '../lib/pocketbase';
+import { pb, checkConnection } from '../lib/pocketbase';
 import '../styles/Admin.css';
 
 const Admin = () => {
