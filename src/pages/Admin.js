@@ -42,12 +42,13 @@ const Admin = () => {
 
     try {
       // Validate and format the data
+      // Format data to match PocketBase schema field names
       const formattedData = {
-        title: formData.title.trim(),
-        year: parseInt(formData.year, 10),
-        description: formData.description.trim(),
-        image: formData.image.trim(),
-        isLeft: Boolean(formData.isLeft)
+        title_field: formData.title.trim(),
+        year_field: parseInt(formData.year, 10),
+        desc_field: formData.description.trim(),
+        img_field: formData.image.trim(),
+        pos_field: Boolean(formData.isLeft)
       };
 
       // Validate required fields
@@ -74,7 +75,12 @@ const Admin = () => {
         isLeft: false
       });
     } catch (error) {
-      console.error('Error details:', error);
+      console.error('Error details:', {
+        message: error.message,
+        data: error.data,
+        status: error.status,
+        response: error.response
+      });
       setMessage('Error adding event: ' + (error.message || 'Unknown error occurred'));
     } finally {
       setIsLoading(false);
