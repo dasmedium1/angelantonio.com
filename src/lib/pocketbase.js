@@ -1,9 +1,21 @@
 import PocketBase from 'pocketbase';
 
 // Initialize PocketBase with configuration
-const pocketbaseUrl = 'http://localhost:8090';
+const pocketbaseUrl = process.env.REACT_APP_POCKETBASE_URL || 'http://localhost:8090';
 console.log('Initializing PocketBase with URL:', pocketbaseUrl);
 export const pb = new PocketBase(pocketbaseUrl);
+
+// Add connection status check
+export const checkConnection = async () => {
+  try {
+    const health = await pb.health.check();
+    console.log('PocketBase health check:', health);
+    return true;
+  } catch (error) {
+    console.error('PocketBase connection error:', error);
+    return false;
+  }
+};
 
 // Add authentication state change listener
 pb.authStore.onChange(() => {

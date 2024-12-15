@@ -15,15 +15,30 @@ const Admin = () => {
     // Test PocketBase connection
     const testConnection = async () => {
       try {
-        const result = await pb.collection('timeline_events').getList(1, 1);
-        console.log('PocketBase connection test successful:', result);
+        const isConnected = await pb.collection('timeline_events').getList(1, 1);
+        console.log('PocketBase connection test successful:', isConnected);
+        
+        if (!isConnected) {
+          setMessage('Warning: Unable to connect to database');
+          return;
+        }
+        
+        // Clear any previous connection warning
+        if (message.includes('database')) {
+          setMessage('');
+        }
       } catch (error) {
         console.error('PocketBase connection test failed:', error);
-        setMessage('Warning: Database connection issue detected');
+        setMessage('Warning: Database connection issue detected. Please check if PocketBase is running.');
       }
     };
 
-    testConnection();
+    const connectionCheck = setInterval(testConnection, 5000);
+    testConnection(); // Initial check
+
+    return () => {
+      clearInterval(connectionCheck); // Cleanup interval on unmount
+    };
   }, [navigate]);
   const [formData, setFormData] = useState({
     title_field: '',
