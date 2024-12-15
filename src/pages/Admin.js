@@ -15,16 +15,11 @@ const Admin = () => {
     // Test PocketBase connection
     const testConnection = async () => {
       try {
-        const isConnected = await pb.collection('timeline_events').getList(1, 1);
-        console.log('PocketBase connection test successful:', isConnected);
-        
-        if (!isConnected) {
-          setMessage('Warning: Unable to connect to database');
-          return;
-        }
+        const result = await pb.collection('timeline_events').getList(1, 1);
+        console.log('PocketBase connection test successful:', result);
         
         // Clear any previous connection warning
-        if (message.includes('database')) {
+        if (message && message.includes('database')) {
           setMessage('');
         }
       } catch (error) {

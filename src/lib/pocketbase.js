@@ -10,7 +10,11 @@ export const checkConnection = async () => {
   try {
     const health = await pb.health.check();
     console.log('PocketBase health check:', health);
-    return true;
+    // Check if we got a valid health response
+    if (health && health.code === 200) {
+      return true;
+    }
+    throw new Error('Invalid health check response');
   } catch (error) {
     console.error('PocketBase connection error:', error);
     return false;
