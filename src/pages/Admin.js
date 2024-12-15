@@ -18,9 +18,9 @@ const Admin = () => {
         const isConnected = await checkConnection();
         if (isConnected) {
           // Clear any previous connection warning
-          if (message && message.includes('database')) {
-            setMessage('');
-          }
+          setMessage((prevMessage) => 
+            prevMessage?.includes('database') ? '' : prevMessage
+          );
         } else {
           setMessage('Warning: Database connection issue detected. Please check if PocketBase is running.');
         }
@@ -30,7 +30,7 @@ const Admin = () => {
       }
     };
 
-    const connectionCheck = setInterval(testConnection, 10000); // Check every 10 seconds
+    const connectionCheck = setInterval(testConnection, 5000); // Check every 5 seconds
     testConnection(); // Initial check
 
     return () => {

@@ -12,12 +12,23 @@ export const checkConnection = async () => {
     const health = await pb.health.check();
     console.log('PocketBase health check passed');
     
-    // Then try a collection query
+    // Then try a collection query with a timeout
+    const timeoutPromise = new Promise((_, reject) => 
+      setTimeout(() => reject(new Error('Query timeout')), 3000)
+    );
+    
     try {
-      await pb.collection('timeline_events').getList(1, 1);
+      await Promise.race([
+        pb.collection('timeline_events').getList(1, 1),
+        timeoutPromise
+      ]);
       console.log('PocketBase collection query successful');
       return true;
     } catch (queryError) {
+      if (queryError.message === 'Query timeout') {
+        console.error('Collection query timed out');
+        return false;
+      }
       // If collection query fails but health check passed, 
       // it might just be an empty collection
       console.log('Collection query failed but health check passed:', queryError);
