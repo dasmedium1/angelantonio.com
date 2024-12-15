@@ -11,11 +11,15 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('Login attempt with email:', email);
+    console.log('PocketBase URL:', process.env.REACT_APP_POCKETBASE_URL);
     try {
-      await pb.admins.authWithPassword(email, password);
+      const authData = await pb.admins.authWithPassword(email, password);
+      console.log('Login successful:', authData);
       navigate('/admin');
     } catch (err) {
-      setError('Invalid credentials');
+      console.error('Login failed:', err);
+      setError(`Login failed: ${err.message}`);
     }
   };
 
