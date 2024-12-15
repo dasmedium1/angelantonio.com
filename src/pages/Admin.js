@@ -5,16 +5,6 @@ import '../styles/Admin.css';
 
 const Admin = () => {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    title_field: '',
-    year_field: '',
-    desc_field: '',
-    img_field: '',
-    pos_field: false
-  });
-  const [isLoading, setIsLoading] = useState(false);
-  const [message, setMessage] = useState('');
-
   useEffect(() => {
     if (!pb.authStore.isValid) {
       navigate('/login');
