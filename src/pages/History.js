@@ -48,13 +48,22 @@ const History = () => {
     fetchTimelineData();
 
     // Subscribe to realtime updates
-    const unsubscribe = pb.collection('timeline_events').subscribe('*', () => {
-      fetchTimelineData();
-    });
+    try {
+      const unsubscribe = pb.collection('timeline_events').subscribe('*', () => {
+        fetchTimelineData();
+      });
 
-    return () => {
-      unsubscribe();
-    };
+      // Only call unsubscribe if it's a function
+      return () => {
+        if (typeof unsubscribe === 'function') {
+          unsubscribe();
+        }
+      };
+    } catch (err) {
+      console.error('Subscription error:', err);
+      // Return empty cleanup function if subscription fails
+      return () => {};
+    }
   }, []);
 
   if (error) {
