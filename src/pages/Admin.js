@@ -20,16 +20,17 @@ const Admin = () => {
           setMessage((prevMessage) => 
             prevMessage?.includes('database') ? '' : prevMessage
           );
-        } else {
-          setMessage('Warning: Database connection issue detected. Please check if PocketBase is running.');
         }
       } catch (error) {
         console.error('Connection test failed:', error);
-        setMessage('Warning: Database connection issue detected. Please check if PocketBase is running.');
+        // Only show warning if there's an actual error
+        if (error.status !== 404) {
+          setMessage('Warning: Database connection issue detected. Please check if PocketBase is running.');
+        }
       }
     };
 
-    const connectionCheck = setInterval(testConnection, 5000); // Check every 5 seconds
+    const connectionCheck = setInterval(testConnection, 10000); // Check every 10 seconds
     testConnection(); // Initial check
 
     return () => {
@@ -78,18 +79,29 @@ const Admin = () => {
       console.log('Submission data:', submissionData);
 
       // Attempt to create record with detailed error handling
+      // Attempt to create record with detailed error handling
       try {
         const record = await pb.collection('timeline_events').create(submissionData);
         console.log('Record created successfully:', record);
-        console.log('Record created:', record);
       } catch (createError) {
         console.error('Detailed create error:', {
           message: createError.message,
           data: createError.data,
           originalError: createError.originalError,
-          response: createError.response
+          response: createError.response,
+          url: createError.url
         });
-        throw createError;
+        
+        // More specific error message
+        let errorMessage = 'Failed to create record: ';
+        if (createError.response?.message) {
+          errorMessage += createError.response.message;
+        } else if (createError.data?.message) {
+          errorMessage += createError.data.message;
+        } else {
+          errorMessage += createError.message || 'Unknown error occurred';
+        }
+        throw new Error(errorMessage);
       }
       
       setMessage('Event added successfully!');

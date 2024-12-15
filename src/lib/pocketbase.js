@@ -12,23 +12,28 @@ export const checkConnection = async () => {
     const health = await pb.health.check();
     console.log('PocketBase health check response:', health);
     
-    console.log('Attempting collection query...');
+    // If health check passes, consider it connected
+    if (health.code === 200) {
+      console.log('PocketBase health check successful');
+      return true;
+    }
+    
+    // Additional collection check
     try {
-      const result = await pb.collection('timeline_events').getList(1, 1);
-      console.log('Collection query result:', result);
+      await pb.collection('timeline_events').getList(1, 1);
+      console.log('Collection query successful');
       return true;
     } catch (queryError) {
-      console.error('Collection query error:', queryError);
-      // If we got this far, the server is up but might not have the collection
-      // This is okay for initial setup
-      return true;
+      if (queryError.status === 404) {
+        // Collection might not exist yet, but server is up
+        console.log('Collection not found, but server is up');
+        return true;
+      }
+      throw queryError;
     }
   } catch (error) {
     console.error('PocketBase connection error:', error);
-    if (error.status === 404) {
-      console.error('PocketBase URL not found. Check if the server is running on the correct port');
-    }
-    return false;
+    throw error;
   }
 };
 
