@@ -103,17 +103,37 @@ const Admin = () => {
           throw new Error('You do not have permission to create records');
         }
 
+        // Enhanced error handling for various response formats
         if (createError.response?.data) {
           const errorDetails = Object.entries(createError.response.data)
-            .map(([field, errors]) => `${field}: ${errors.join(', ')}`)
+            .map(([field, errors]) => {
+              // Handle both array and string error messages
+              const errorMsg = Array.isArray(errors) ? errors.join(', ') : errors;
+              return `${field}: ${errorMsg}`;
+            })
             .join('; ');
           throw new Error(`Validation failed - ${errorDetails}`);
         }
 
-        // Fallback error message with any available details
-        const errorMessage = createError.message || 
-                           createError.response?.message ||
-                           'Failed to create record - please try again';
+        // Check for specific error types
+        if (createError.status === 400) {
+          throw new Error('Invalid data provided - please check your input');
+        }
+
+        // Detailed fallback error message
+        const errorMessage = 
+          createError.message || 
+          createError.response?.message ||
+          createError.data?.message ||
+          'Failed to create record - please try again';
+        
+        console.error('Detailed error:', {
+          message: errorMessage,
+          status: createError.status,
+          data: createError.data,
+          response: createError.response
+        });
+        
         throw new Error(errorMessage);
       }
       
@@ -132,7 +152,12 @@ const Admin = () => {
         status: error.status,
         response: error.response
       });
-      setMessage('Error adding event: ' + (error.message || 'Unknown error occurred'));
+      const errorMsg = error.message || 'Unknown error occurred';
+      console.error('Form submission error:', {
+        message: errorMsg,
+        originalError: error
+      });
+      setMessage('Error adding event: ' + errorMsg);
     } finally {
       setIsLoading(false);
     }
