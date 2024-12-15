@@ -6,8 +6,8 @@ const { promisify } = require('util');
 const execAsync = promisify(exec);
 
 const PB_VERSION = 'v0.19.4';
-const PB_FILENAME = 'pocketbase.exe';
-const CONFIG_FILE = 'config.json';
+const PB_FILENAME = path.join(__dirname, 'pocketbase.exe');
+const CONFIG_FILE = path.join(__dirname, 'config.json');
 
 async function downloadPocketBase() {
   const url = `https://github.com/pocketbase/pocketbase/releases/download/${PB_VERSION}/pocketbase_${PB_VERSION}_windows_amd64.zip`;
@@ -52,12 +52,13 @@ async function setup() {
     }
 
     // Create data directory if it doesn't exist
-    if (!fs.existsSync('pb_data')) {
-      fs.mkdirSync('pb_data');
+    const pbDataPath = path.join(__dirname, 'pb_data');
+    if (!fs.existsSync(pbDataPath)) {
+      fs.mkdirSync(pbDataPath);
     }
 
     console.log('Setup complete! You can now run PocketBase using:');
-    console.log('./pocketbase serve');
+    console.log('pocketbase.exe serve');
     console.log('\nThen visit http://127.0.0.1:8090/_/ to create your admin account');
   } catch (err) {
     console.error('Setup failed:', err);
