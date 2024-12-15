@@ -37,11 +37,11 @@ migrate((db) => {
         required: true,
       }
     ],
-    listRule: '',
-    viewRule: '',
-    createRule: '',
-    updateRule: '',
-    deleteRule: '',
+    listRule: null,
+    viewRule: null,
+    createRule: "@request.auth.id != ''",
+    updateRule: "@request.auth.id != ''",
+    deleteRule: "@request.auth.id != ''",
     options: {}
   });
 
