@@ -69,6 +69,7 @@ const Admin = () => {
       try {
         const record = await pb.collection('timeline_events').create(formattedData);
         console.log('Record created successfully:', record);
+        console.log('Record created:', record);
       } catch (createError) {
         console.error('Detailed create error:', {
           message: createError.message,
@@ -78,7 +79,6 @@ const Admin = () => {
         });
         throw createError;
       }
-      console.log('Record created:', record);
       
       setMessage('Event added successfully!');
       setFormData({
