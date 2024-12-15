@@ -33,16 +33,11 @@ const History = () => {
 
   useEffect(() => {
     const fetchTimelineData = async () => {
-      // Add cache-busting query parameter
-      const timestamp = new Date().getTime();
-      console.log('Fetching timeline data...');
       try {
-        const response = await fetch(`/data/timeline.json?t=${timestamp}`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch timeline data');
-        }
-        const data = await response.json();
-        setTimelineEvents(data.timelineEvents);
+        const records = await pb.collection('timeline_events').getFullList({
+          sort: 'year'
+        });
+        setTimelineEvents(records);
       } catch (err) {
         setError(err.message);
         console.error('Error loading timeline data:', err);
@@ -50,15 +45,14 @@ const History = () => {
     };
 
     fetchTimelineData();
-    
-    // Refresh every 5 seconds in development mode
-    let interval;
-    if (process.env.NODE_ENV === 'development') {
-      interval = setInterval(fetchTimelineData, 5000);
-    }
+
+    // Subscribe to realtime updates
+    const unsubscribe = pb.collection('timeline_events').subscribe('*', () => {
+      fetchTimelineData();
+    });
 
     return () => {
-      if (interval) clearInterval(interval);
+      unsubscribe();
     };
   }, []);
 

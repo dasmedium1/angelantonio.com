@@ -1,0 +1,84 @@
+.admin-page {
+  min-height: 100vh;
+  padding: 80px 20px;
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.admin-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 30px;
+  border-radius: 8px;
+}
+
+.admin-container h1 {
+  margin-bottom: 30px;
+  color: #ff3366;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #cccccc;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="url"],
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  color: #ffffff;
+}
+
+.form-group textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.form-group.checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.form-group.checkbox label {
+  margin-bottom: 0;
+  margin-left: 10px;
+}
+
+button {
+  background: #ff3366;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background: #ff1f5a;
+}
+
+button:disabled {
+  background: #666;
+  cursor: not-allowed;
+}
+
+.message {
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}

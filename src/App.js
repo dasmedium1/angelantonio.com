@@ -7,6 +7,7 @@ import History from './pages/History';
 import Live from './pages/Live';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import Admin from './pages/Admin';
 import './styles/App.css';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path="/shows" element={<Live />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
         </div>
       </Router>
