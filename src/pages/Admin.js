@@ -52,12 +52,12 @@ const Admin = () => {
 
     try {
       // Validate raw input first
-      if (!formData.title.trim() || !formData.year || !formData.description.trim() || !formData.image.trim()) {
+      if (!formData.title_field.trim() || !formData.year_field || !formData.desc_field.trim() || !formData.img_field.trim()) {
         throw new Error('All fields are required');
       }
 
       // Validate year format
-      const yearNum = parseInt(formData.year, 10);
+      const yearNum = parseInt(formData.year_field, 10);
       if (isNaN(yearNum) || yearNum < 1900 || yearNum > 2100) {
         throw new Error('Please enter a valid year between 1900 and 2100');
       }
@@ -67,9 +67,8 @@ const Admin = () => {
 
       // Prepare data for submission
       const submissionData = {
-        ...formData,
-        year_field: yearNum,
         title_field: formData.title_field.trim(),
+        year_field: yearNum,
         desc_field: formData.desc_field.trim(),
         img_field: formData.img_field.trim(),
         pos_field: Boolean(formData.pos_field)
