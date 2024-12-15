@@ -54,11 +54,11 @@ const Admin = () => {
 
       // Format data to match PocketBase schema field names
       const formattedData = {
-        title_field: formData.title.trim(),
-        year_field: yearNum,
-        desc_field: formData.description.trim(),
-        img_field: formData.image.trim(),
-        pos_field: Boolean(formData.isLeft)
+        title: formData.title.trim(),
+        year: yearNum,
+        description: formData.description.trim(),
+        image: formData.image.trim(),
+        isLeft: Boolean(formData.isLeft)
       };
 
       // Additional validation logging
@@ -83,7 +83,8 @@ const Admin = () => {
         message: error.message,
         data: error.data,
         status: error.status,
-        response: error.response
+        response: error.response,
+        originalData: formattedData
       });
       setMessage('Error adding event: ' + (error.message || 'Unknown error occurred'));
     } finally {
