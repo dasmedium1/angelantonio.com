@@ -41,25 +41,29 @@ const Admin = () => {
     setMessage('');
 
     try {
-      // Validate and format the data
+      // Validate raw input first
+      if (!formData.title.trim() || !formData.year || !formData.description.trim() || !formData.image.trim()) {
+        throw new Error('All fields are required');
+      }
+
+      // Validate year format
+      const yearNum = parseInt(formData.year, 10);
+      if (isNaN(yearNum) || yearNum < 1900 || yearNum > 2100) {
+        throw new Error('Please enter a valid year between 1900 and 2100');
+      }
+
       // Format data to match PocketBase schema field names
       const formattedData = {
         title_field: formData.title.trim(),
-        year_field: parseInt(formData.year, 10),
+        year_field: yearNum,
         desc_field: formData.description.trim(),
         img_field: formData.image.trim(),
         pos_field: Boolean(formData.isLeft)
       };
 
-      // Validate required fields
-      if (!formattedData.title || !formattedData.year || !formattedData.description || !formattedData.image) {
-        throw new Error('All fields are required');
-      }
-
-      // Validate year format
-      if (isNaN(formattedData.year) || formattedData.year < 1900 || formattedData.year > 2100) {
-        throw new Error('Please enter a valid year between 1900 and 2100');
-      }
+      // Additional validation logging
+      console.log('Validated form data:', formData);
+      console.log('Formatted data for PocketBase:', formattedData);
 
       console.log('Sending data to PocketBase:', formattedData);
       
