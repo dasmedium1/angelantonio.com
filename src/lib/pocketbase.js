@@ -1,7 +1,7 @@
 import PocketBase from 'pocketbase';
 
 // Initialize PocketBase with configuration
-const pocketbaseUrl = process.env.REACT_APP_POCKETBASE_URL || 'http://pocketbase:8090';
+const pocketbaseUrl = process.env.REACT_APP_POCKETBASE_URL || 'http://localhost:8090';
 console.log('Initializing PocketBase with URL:', pocketbaseUrl);
 export const pb = new PocketBase(pocketbaseUrl);
 
