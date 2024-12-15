@@ -15,4 +15,4 @@ RUN wget https://github.com/pocketbase/pocketbase/releases/download/v0.19.4/pock
 EXPOSE 8090
 
 COPY pb-config /pb/pb-config
-CMD ["./pocketbase", "serve", "--http=0.0.0.0:8090", "--config=/pb/pb-config/config.json"]
+CMD ["./pocketbase", "serve", "--http=0.0.0.0:8090", "--dir=/pb/pb_data", "--encryptionEnv=POCKETBASE_ENCRYPTION_KEY"]
