@@ -1,8 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { pb } from '../lib/pocketbase';
 import '../styles/Admin.css';
 
 const Admin = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!pb.authStore.isValid) {
+      navigate('/login');
+    }
+  }, [navigate]);
   const [formData, setFormData] = useState({
     title: '',
     year: '',
