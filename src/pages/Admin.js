@@ -9,7 +9,21 @@ const Admin = () => {
   useEffect(() => {
     if (!pb.authStore.isValid) {
       navigate('/login');
+      return;
     }
+
+    // Test PocketBase connection
+    const testConnection = async () => {
+      try {
+        const result = await pb.collection('timeline_events').getList(1, 1);
+        console.log('PocketBase connection test successful:', result);
+      } catch (error) {
+        console.error('PocketBase connection test failed:', error);
+        setMessage('Warning: Database connection issue detected');
+      }
+    };
+
+    testConnection();
   }, [navigate]);
   const [formData, setFormData] = useState({
     title: '',
@@ -24,11 +38,33 @@ const Admin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+    setMessage('');
+
     try {
-      await pb.collection('timeline_events').create({
-        ...formData,
-        year: parseInt(formData.year)
-      });
+      // Validate and format the data
+      const formattedData = {
+        title: formData.title.trim(),
+        year: parseInt(formData.year, 10),
+        description: formData.description.trim(),
+        image: formData.image.trim(),
+        isLeft: Boolean(formData.isLeft)
+      };
+
+      // Validate required fields
+      if (!formattedData.title || !formattedData.year || !formattedData.description || !formattedData.image) {
+        throw new Error('All fields are required');
+      }
+
+      // Validate year format
+      if (isNaN(formattedData.year) || formattedData.year < 1900 || formattedData.year > 2100) {
+        throw new Error('Please enter a valid year between 1900 and 2100');
+      }
+
+      console.log('Sending data to PocketBase:', formattedData);
+      
+      const record = await pb.collection('timeline_events').create(formattedData);
+      console.log('Record created:', record);
+      
       setMessage('Event added successfully!');
       setFormData({
         title: '',
@@ -38,9 +74,11 @@ const Admin = () => {
         isLeft: false
       });
     } catch (error) {
-      setMessage('Error adding event: ' + error.message);
+      console.error('Error details:', error);
+      setMessage('Error adding event: ' + (error.message || 'Unknown error occurred'));
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   const handleChange = (e) => {
