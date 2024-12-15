@@ -78,29 +78,42 @@ const Admin = () => {
 
       console.log('Submission data:', submissionData);
 
-      // Attempt to create record with detailed error handling
-      // Attempt to create record with detailed error handling
+      // Attempt to create record with enhanced error handling
       try {
+        // First verify the connection
+        const isConnected = await checkConnection();
+        if (!isConnected) {
+          throw new Error('Database connection is not available');
+        }
+
+        // Log the actual request
+        console.log('Attempting to create record with data:', submissionData);
+        
         const record = await pb.collection('timeline_events').create(submissionData);
         console.log('Record created successfully:', record);
       } catch (createError) {
-        console.error('Detailed create error:', {
-          message: createError.message,
-          data: createError.data,
-          originalError: createError.originalError,
-          response: createError.response,
-          url: createError.url
-        });
+        console.error('Create record error:', createError);
         
-        // More specific error message
-        let errorMessage = 'Failed to create record: ';
-        if (createError.response?.message) {
-          errorMessage += createError.response.message;
-        } else if (createError.data?.message) {
-          errorMessage += createError.data.message;
-        } else {
-          errorMessage += createError.message || 'Unknown error occurred';
+        // Enhanced error detection
+        if (createError.status === 401) {
+          throw new Error('Authentication expired - please log in again');
         }
+        
+        if (createError.status === 403) {
+          throw new Error('You do not have permission to create records');
+        }
+
+        if (createError.response?.data) {
+          const errorDetails = Object.entries(createError.response.data)
+            .map(([field, errors]) => `${field}: ${errors.join(', ')}`)
+            .join('; ');
+          throw new Error(`Validation failed - ${errorDetails}`);
+        }
+
+        // Fallback error message with any available details
+        const errorMessage = createError.message || 
+                           createError.response?.message ||
+                           'Failed to create record - please try again';
         throw new Error(errorMessage);
       }
       
@@ -137,7 +150,7 @@ const Admin = () => {
     <div className="admin-page">
       <div className="admin-container">
         <h1>Timeline Admin</h1>
-        {message && <div className="message">{message}</div>}
+        {message && <div className={`message ${message.includes('Error') ? 'error' : 'success'}`}>{message}</div>}
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="title_field">Title:</label>
