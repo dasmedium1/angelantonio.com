@@ -83,8 +83,7 @@ const Admin = () => {
         message: error.message,
         data: error.data,
         status: error.status,
-        response: error.response,
-        originalData: formattedData
+        response: error.response
       });
       setMessage('Error adding event: ' + (error.message || 'Unknown error occurred'));
     } finally {
