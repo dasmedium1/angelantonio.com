@@ -8,34 +8,26 @@ export const pb = new PocketBase(pocketbaseUrl);
 // Add connection status check
 export const checkConnection = async () => {
   try {
-    // Try health check first
+    console.log('Attempting PocketBase health check...');
     const health = await pb.health.check();
-    console.log('PocketBase health check passed');
+    console.log('PocketBase health check response:', health);
     
-    // Then try a collection query with a timeout
-    const timeoutPromise = new Promise((_, reject) => 
-      setTimeout(() => reject(new Error('Query timeout')), 3000)
-    );
-    
+    console.log('Attempting collection query...');
     try {
-      await Promise.race([
-        pb.collection('timeline_events').getList(1, 1),
-        timeoutPromise
-      ]);
-      console.log('PocketBase collection query successful');
+      const result = await pb.collection('timeline_events').getList(1, 1);
+      console.log('Collection query result:', result);
       return true;
     } catch (queryError) {
-      if (queryError.message === 'Query timeout') {
-        console.error('Collection query timed out');
-        return false;
-      }
-      // If collection query fails but health check passed, 
-      // it might just be an empty collection
-      console.log('Collection query failed but health check passed:', queryError);
+      console.error('Collection query error:', queryError);
+      // If we got this far, the server is up but might not have the collection
+      // This is okay for initial setup
       return true;
     }
   } catch (error) {
     console.error('PocketBase connection error:', error);
+    if (error.status === 404) {
+      console.error('PocketBase URL not found. Check if the server is running on the correct port');
+    }
     return false;
   }
 };
