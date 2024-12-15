@@ -1,0 +1,38 @@
+{
+  "port": 8090,
+  "dataDir": "./pb_data",
+  "encryptionEnv": "POCKETBASE_ENCRYPTION_KEY",
+  "collections": [
+    {
+      "name": "timeline_events",
+      "type": "base",
+      "schema": [
+        {
+          "name": "title",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "year",
+          "type": "number",
+          "required": true
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "image",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "isLeft",
+          "type": "bool",
+          "required": true
+        }
+      ]
+    }
+  ]
+}
