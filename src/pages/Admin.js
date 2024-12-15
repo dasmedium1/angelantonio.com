@@ -26,11 +26,11 @@ const Admin = () => {
     testConnection();
   }, [navigate]);
   const [formData, setFormData] = useState({
-    title: '',
-    year: '',
-    description: '',
-    image: '',
-    isLeft: false
+    title_field: '',
+    year_field: '',
+    desc_field: '',
+    img_field: '',
+    pos_field: false
   });
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState('');
@@ -52,22 +52,24 @@ const Admin = () => {
         throw new Error('Please enter a valid year between 1900 and 2100');
       }
 
-      // Format data to match PocketBase schema field names and field IDs
-      const formattedData = {
-        title_field: formData.title.trim(),
-        year_field: yearNum,
-        desc_field: formData.description.trim(),
-        img_field: formData.image.trim(),
-        pos_field: Boolean(formData.isLeft)
-      };
-
       // Additional validation logging
       console.log('Validated form data:', formData);
-      console.log('Formatted data for PocketBase:', formattedData);
+
+      // Prepare data for submission
+      const submissionData = {
+        ...formData,
+        year_field: yearNum,
+        title_field: formData.title_field.trim(),
+        desc_field: formData.desc_field.trim(),
+        img_field: formData.img_field.trim(),
+        pos_field: Boolean(formData.pos_field)
+      };
+
+      console.log('Submission data:', submissionData);
 
       // Attempt to create record with detailed error handling
       try {
-        const record = await pb.collection('timeline_events').create(formattedData);
+        const record = await pb.collection('timeline_events').create(submissionData);
         console.log('Record created successfully:', record);
         console.log('Record created:', record);
       } catch (createError) {
@@ -82,11 +84,11 @@ const Admin = () => {
       
       setMessage('Event added successfully!');
       setFormData({
-        title: '',
-        year: '',
-        description: '',
-        image: '',
-        isLeft: false
+        title_field: '',
+        year_field: '',
+        desc_field: '',
+        img_field: '',
+        pos_field: false
       });
     } catch (error) {
       console.error('Error details:', {
@@ -116,44 +118,44 @@ const Admin = () => {
         {message && <div className="message">{message}</div>}
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="title">Title:</label>
+            <label htmlFor="title_field">Title:</label>
             <input
               type="text"
-              id="title"
-              name="title"
-              value={formData.title}
+              id="title_field"
+              name="title_field"
+              value={formData.title_field}
               onChange={handleChange}
               required
             />
           </div>
           <div className="form-group">
-            <label htmlFor="year">Year:</label>
+            <label htmlFor="year_field">Year:</label>
             <input
               type="number"
-              id="year"
-              name="year"
-              value={formData.year}
+              id="year_field"
+              name="year_field"
+              value={formData.year_field}
               onChange={handleChange}
               required
             />
           </div>
           <div className="form-group">
-            <label htmlFor="description">Description (HTML allowed):</label>
+            <label htmlFor="desc_field">Description (HTML allowed):</label>
             <textarea
-              id="description"
-              name="description"
-              value={formData.description}
+              id="desc_field"
+              name="desc_field"
+              value={formData.desc_field}
               onChange={handleChange}
               required
             />
           </div>
           <div className="form-group">
-            <label htmlFor="image">Image URL:</label>
+            <label htmlFor="img_field">Image URL:</label>
             <input
               type="url"
-              id="image"
-              name="image"
-              value={formData.image}
+              id="img_field"
+              name="img_field"
+              value={formData.img_field}
               onChange={handleChange}
               required
             />
@@ -162,8 +164,8 @@ const Admin = () => {
             <label>
               <input
                 type="checkbox"
-                name="isLeft"
-                checked={formData.isLeft}
+                name="pos_field"
+                checked={formData.pos_field}
                 onChange={handleChange}
               />
               Position on left side
