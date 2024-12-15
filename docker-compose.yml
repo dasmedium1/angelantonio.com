@@ -23,7 +23,8 @@ services:
       - "8090:8090"
     volumes:
       - pocketbase_data:/pb/pb_data
-      - ./pb-config:/pb/pb-config
+      - pb_config:/pb/pb-config
 
 volumes:
   pocketbase_data:
+  pb_config:
