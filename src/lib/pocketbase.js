@@ -8,13 +8,12 @@ export const pb = new PocketBase(pocketbaseUrl);
 // Add connection status check
 export const checkConnection = async () => {
   try {
+    // Try both health check and a simple collection list query
     const health = await pb.health.check();
-    console.log('PocketBase health check:', health);
-    // Check if we got a valid health response
-    if (health && health.code === 200) {
-      return true;
-    }
-    throw new Error('Invalid health check response');
+    await pb.collection('timeline_events').getList(1, 1);
+    
+    console.log('PocketBase connection verified');
+    return true;
   } catch (error) {
     console.error('PocketBase connection error:', error);
     return false;
