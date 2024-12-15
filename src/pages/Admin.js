@@ -8,34 +8,7 @@ const Admin = () => {
   useEffect(() => {
     if (!pb.authStore.isValid) {
       navigate('/login');
-      return;
     }
-
-    // Test PocketBase connection
-    const testConnection = async () => {
-      try {
-        const isConnected = await checkConnection();
-        if (isConnected) {
-          // Clear any previous connection warning
-          setMessage((prevMessage) => 
-            prevMessage?.includes('database') ? '' : prevMessage
-          );
-        }
-      } catch (error) {
-        console.error('Connection test failed:', error);
-        // Only show warning for specific connection errors
-        if (error.status === 502 || error.status === 503 || error.status === 504) {
-          setMessage('Warning: Database connection issue detected. Please check if PocketBase is running.');
-        }
-      }
-    };
-
-    const connectionCheck = setInterval(testConnection, 10000); // Check every 10 seconds
-    testConnection(); // Initial check
-
-    return () => {
-      clearInterval(connectionCheck); // Cleanup interval on unmount
-    };
   }, [navigate]);
   const [formData, setFormData] = useState({
     title_field: '',
