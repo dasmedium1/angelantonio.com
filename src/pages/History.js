@@ -33,37 +33,44 @@ const History = () => {
   }, []);
 
   useEffect(() => {
+    let isSubscribed = true;
+
     const fetchTimelineData = async () => {
       try {
-        const records = await pb.collection('timeline_events').getFullList({
-          sort: 'year'
-        });
-        setTimelineEvents(records);
+        // Only fetch if component is still mounted
+        if (isSubscribed) {
+          const records = await pb.collection('timeline_events').getFullList({
+            sort: 'year',
+            requestKey: 'timeline_list' // Unique request key to prevent auto-cancellation conflicts
+          });
+          setTimelineEvents(records);
+        }
       } catch (err) {
-        setError(err.message);
-        console.error('Error loading timeline data:', err);
+        // Ignore auto-cancellation errors
+        if (!err.isAbort) {
+          setError(err.message);
+          console.error('Error loading timeline data:', err);
+        }
       }
     };
 
+    // Initial data fetch
     fetchTimelineData();
 
     // Subscribe to realtime updates
-    try {
-      const unsubscribe = pb.collection('timeline_events').subscribe('*', () => {
+    const unsubscribe = pb.collection('timeline_events').subscribe('*', () => {
+      if (isSubscribed) {
         fetchTimelineData();
-      });
+      }
+    });
 
-      // Only call unsubscribe if it's a function
-      return () => {
-        if (typeof unsubscribe === 'function') {
-          unsubscribe();
-        }
-      };
-    } catch (err) {
-      console.error('Subscription error:', err);
-      // Return empty cleanup function if subscription fails
-      return () => {};
-    }
+    // Cleanup function
+    return () => {
+      isSubscribed = false;
+      if (unsubscribe) {
+        pb.collection('timeline_events').unsubscribe('*');
+      }
+    };
   }, []);
 
   if (error) {
