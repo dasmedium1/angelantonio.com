@@ -23,8 +23,8 @@ const Admin = () => {
         }
       } catch (error) {
         console.error('Connection test failed:', error);
-        // Only show warning if there's an actual error
-        if (error.status !== 404) {
+        // Only show warning for specific connection errors
+        if (error.status === 502 || error.status === 503 || error.status === 504) {
           setMessage('Warning: Database connection issue detected. Please check if PocketBase is running.');
         }
       }
