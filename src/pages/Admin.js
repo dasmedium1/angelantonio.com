@@ -3,6 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import { pb } from '../lib/pocketbase';
 import '../styles/Admin.css';
 
+const handleLogout = async (navigate) => {
+  try {
+    pb.authStore.clear();
+    navigate('/login');
+  } catch (error) {
+    console.error('Logout error:', error);
+  }
+};
+
 const Admin = () => {
   const navigate = useNavigate();
   const [isAuthChecking, setIsAuthChecking] = useState(true);
@@ -130,7 +139,15 @@ const Admin = () => {
   return (
     <div className="admin-page">
       <div className="admin-container">
-        <h1>Timeline Admin</h1>
+        <div className="admin-header">
+          <h1>Timeline Admin</h1>
+          <button 
+            className="logout-button"
+            onClick={() => handleLogout(navigate)}
+          >
+            Logout
+          </button>
+        </div>
         {message && <div className={`message ${message.includes('Error') ? 'error' : 'success'}`}>{message}</div>}
         <form onSubmit={handleSubmit}>
           <div className="form-group">

@@ -13,9 +13,32 @@
   border-radius: 8px;
 }
 
-.admin-container h1 {
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 30px;
+}
+
+.admin-header h1 {
+  margin: 0;
   color: #ff3366;
+}
+
+.logout-button {
+  background: #333;
+  color: white;
+  border: 1px solid #ff3366;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.logout-button:hover {
+  background: #ff3366;
+  color: white;
 }
 
 .form-group {
