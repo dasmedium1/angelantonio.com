@@ -42,7 +42,7 @@ const Admin = () => {
         year: yearNum,
         description: formData.desc_field.trim(),
         image: formData.img_field.trim(),
-        isLeft: formData.pos_field  // Use checkbox value directly - checked = left side
+        isLeft: Boolean(formData.pos_field)  // Ensure boolean value for isLeft
       };
 
       console.log('Attempting to create event with data:', eventData);
