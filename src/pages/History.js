@@ -90,7 +90,7 @@ const History = () => {
         </div>
         {timelineEvents.map((event, index) => (
           <div key={index}>
-            <div className={`timeline-event ${event.isLeft ? 'left' : 'right'}`} data-year={event.year}>
+            <div className={`timeline-event ${event.isLeft === true ? 'left' : 'right'}`} data-year={event.year}>
               <div className="timeline-content">
                 <div className="event-details">
                   <h3>{event.title}</h3>
