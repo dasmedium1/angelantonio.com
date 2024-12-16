@@ -14,8 +14,7 @@ const Admin = () => {
     title_field: '',
     year_field: '',
     desc_field: '',
-    img_field: '',
-    pos_field: 'right'  // Default to right side
+    img_field: ''
   });
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState('');
@@ -41,8 +40,7 @@ const Admin = () => {
         title: formData.title_field.trim(),
         year: yearNum,
         description: formData.desc_field.trim(),
-        image: formData.img_field.trim(),
-        isLeft: formData.pos_field === 'left' ? true : false  // Explicit boolean conversion
+        image: formData.img_field.trim()
       };
 
       // Log the exact data being sent
@@ -59,8 +57,7 @@ const Admin = () => {
         title_field: '',
         year_field: '',
         desc_field: '',
-        img_field: '',
-        pos_field: 'right'  // Reset to default right position
+        img_field: ''
       });
       setMessage('Event added successfully!');
     } catch (error) {
@@ -127,31 +124,6 @@ const Admin = () => {
               onChange={handleChange}
               required
             />
-          </div>
-          <div className="form-group position-selector">
-            <label>Position:</label>
-            <div className="radio-group">
-              <label>
-                <input
-                  type="radio"
-                  name="pos_field"
-                  value="left"
-                  checked={formData.pos_field === 'left'}
-                  onChange={handleChange}
-                />
-                Left side
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="pos_field"
-                  value="right"
-                  checked={formData.pos_field === 'right'}
-                  onChange={handleChange}
-                />
-                Right side
-              </label>
-            </div>
           </div>
           <button type="submit" disabled={isLoading}>
             {isLoading ? 'Adding...' : 'Add Event'}
