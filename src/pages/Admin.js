@@ -1,15 +1,66 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { pb, checkConnection } from '../lib/pocketbase';
+import { pb } from '../lib/pocketbase';
 import '../styles/Admin.css';
 
 const Admin = () => {
   const navigate = useNavigate();
+  const [isAuthChecking, setIsAuthChecking] = useState(true);
+
+  // Initial auth check
   useEffect(() => {
-    if (!pb.authStore.isValid) {
-      navigate('/login');
-    }
+    const checkAuth = () => {
+      if (!pb.authStore.isValid) {
+        navigate('/login');
+        return false;
+      }
+      return true;
+    };
+
+    const isAuthed = checkAuth();
+    setIsAuthChecking(false);
+
+    // Set up periodic auth checks
+    const authCheckInterval = setInterval(() => {
+      checkAuth();
+    }, 30000); // Check every 30 seconds
+
+    return () => clearInterval(authCheckInterval);
   }, [navigate]);
+
+  // Session timeout check
+  useEffect(() => {
+    const checkSessionTimeout = () => {
+      if (pb.authStore.isValid) {
+        const tokenExp = new Date(pb.authStore.model.exp * 1000);
+        const now = new Date();
+        const timeUntilExp = tokenExp - now;
+        
+        if (timeUntilExp < 300000) { // Less than 5 minutes left
+          alert('Your session will expire soon. Please save your work and re-login.');
+        }
+        
+        if (timeUntilExp <= 0) {
+          pb.authStore.clear();
+          navigate('/login');
+        }
+      }
+    };
+
+    const timeoutCheck = setInterval(checkSessionTimeout, 60000); // Check every minute
+    return () => clearInterval(timeoutCheck);
+  }, [navigate]);
+
+  // Protect against direct access while checking auth
+  if (isAuthChecking) {
+    return <div className="admin-page"><div className="admin-container">Verifying access...</div></div>;
+  }
+
+  // Immediate redirect if not authenticated
+  if (!pb.authStore.isValid) {
+    navigate('/login');
+    return null;
+  }
   const [formData, setFormData] = useState({
     title_field: '',
     year_field: '',
