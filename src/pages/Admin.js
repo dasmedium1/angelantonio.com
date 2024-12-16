@@ -6,6 +6,14 @@ import '../styles/Admin.css';
 const Admin = () => {
   const navigate = useNavigate();
   const [isAuthChecking, setIsAuthChecking] = useState(true);
+  const [formData, setFormData] = useState({
+    title_field: '',
+    year_field: '',
+    desc_field: '',
+    img_field: ''
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState('');
 
   // Initial auth check
   useEffect(() => {
@@ -61,14 +69,6 @@ const Admin = () => {
     navigate('/login');
     return null;
   }
-  const [formData, setFormData] = useState({
-    title_field: '',
-    year_field: '',
-    desc_field: '',
-    img_field: ''
-  });
-  const [isLoading, setIsLoading] = useState(false);
-  const [message, setMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
