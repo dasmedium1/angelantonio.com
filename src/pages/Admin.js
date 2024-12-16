@@ -15,7 +15,7 @@ const Admin = () => {
     year_field: '',
     desc_field: '',
     img_field: '',
-    pos_field: false
+    pos_field: 'right'  // Default to right side
   });
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState('');
@@ -42,7 +42,7 @@ const Admin = () => {
         year: yearNum,
         description: formData.desc_field.trim(),
         image: formData.img_field.trim(),
-        isLeft: formData.pos_field === true  // Explicit boolean comparison
+        isLeft: formData.pos_field === 'left'  // Convert position selection to boolean
       };
 
       console.log('Attempting to create event with data:', eventData);
@@ -125,16 +125,30 @@ const Admin = () => {
               required
             />
           </div>
-          <div className="form-group checkbox">
-            <label>
-              <input
-                type="checkbox"
-                name="pos_field"
-                checked={formData.pos_field}
-                onChange={handleChange}
-              />
-              Position on left side
-            </label>
+          <div className="form-group position-selector">
+            <label>Position:</label>
+            <div className="radio-group">
+              <label>
+                <input
+                  type="radio"
+                  name="pos_field"
+                  value="left"
+                  checked={formData.pos_field === 'left'}
+                  onChange={handleChange}
+                />
+                Left side
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="pos_field"
+                  value="right"
+                  checked={formData.pos_field === 'right'}
+                  onChange={handleChange}
+                />
+                Right side
+              </label>
+            </div>
           </div>
           <button type="submit" disabled={isLoading}>
             {isLoading ? 'Adding...' : 'Add Event'}
