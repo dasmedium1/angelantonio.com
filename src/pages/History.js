@@ -86,14 +86,14 @@ const History = () => {
       <div className="timeline-container">
         <div className="timeline-line"></div>
         <div className="floating-year-marker">
-          <span>{currentYear}</span>
+          {currentYear && <span>{currentYear}</span>}
         </div>
         {timelineEvents.map((event, index) => {
           const eventDate = new Date(event.event_date);
           const year = eventDate.getFullYear();
           return (
           <div key={index}>
-            <div className="timeline-event-wrapper" data-year={year}>
+            <div className="timeline-event-wrapper timeline-event" data-year={year}>
               <div className={`timeline-text ${index % 2 === 0 ? 'left' : 'right'}`}>
                 <div className="event-details">
                   <h3>{event.title}</h3>
