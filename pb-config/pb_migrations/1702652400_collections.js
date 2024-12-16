@@ -31,15 +31,6 @@ migrate(
           type: "text",
           required: true,
         },
-        {
-          id: "pos_field",
-          name: "isLeft",
-          type: "bool",
-          required: true,
-          options: {
-            default: false
-          }
-        },
       ],
       listRule: "",
       viewRule: "",
