@@ -42,8 +42,11 @@ const Admin = () => {
         year: yearNum,
         description: formData.desc_field.trim(),
         image: formData.img_field.trim(),
-        isLeft: formData.pos_field === 'left'  // Convert position selection to boolean
+        isLeft: formData.pos_field === 'left' ? true : false  // Explicit boolean conversion
       };
+
+      // Log the exact data being sent
+      console.log('Submitting event data:', JSON.stringify(eventData, null, 2));
 
       console.log('Attempting to create event with data:', eventData);
 

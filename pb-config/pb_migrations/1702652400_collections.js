@@ -35,7 +35,7 @@ migrate(
           id: "pos_field",
           name: "isLeft",
           type: "bool",
-          required: false,
+          required: true,
           options: {
             default: false
           }

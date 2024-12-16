@@ -99,7 +99,9 @@
           "system": false,
           "required": true,
           "unique": false,
-          "options": {}
+          "options": {
+            "default": false
+          }
         }
       ],
       "listRule": "",
