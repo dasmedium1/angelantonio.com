@@ -42,7 +42,7 @@ const Admin = () => {
         year: yearNum,
         description: formData.desc_field.trim(),
         image: formData.img_field.trim(),
-        isLeft: formData.pos_field
+        isLeft: !formData.pos_field  // Invert the boolean value for correct timeline positioning
       };
 
       console.log('Attempting to create event with data:', eventData);
