@@ -14,9 +14,9 @@ migrate(
           required: true,
         },
         {
-          id: "year_field",
-          name: "year",
-          type: "number",
+          id: "date_field",
+          name: "event_date",
+          type: "date",
           required: true,
         },
         {

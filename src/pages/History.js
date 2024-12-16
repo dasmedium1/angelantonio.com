@@ -40,7 +40,7 @@ const History = () => {
         // Only fetch if component is still mounted
         if (isSubscribed) {
           const records = await pb.collection('timeline_events').getFullList({
-            sort: 'year',
+            sort: '-event_date', // Sort by date descending (most recent first)
             requestKey: 'timeline_list' // Unique request key to prevent auto-cancellation conflicts
           });
           setTimelineEvents(records);
@@ -88,9 +88,12 @@ const History = () => {
         <div className="floating-year-marker">
           <span>{currentYear}</span>
         </div>
-        {timelineEvents.map((event, index) => (
+        {timelineEvents.map((event, index) => {
+          const eventDate = new Date(event.event_date);
+          const year = eventDate.getFullYear();
+          return (
           <div key={index}>
-            <div className="timeline-event-wrapper" data-year={event.year}>
+            <div className="timeline-event-wrapper" data-year={year}>
               <div className={`timeline-text ${index % 2 === 0 ? 'left' : 'right'}`}>
                 <div className="event-details">
                   <h3>{event.title}</h3>
@@ -104,7 +107,8 @@ const History = () => {
               </div>
             </div>
           </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

@@ -17,7 +17,7 @@ const Admin = () => {
   const [isAuthChecking, setIsAuthChecking] = useState(true);
   const [formData, setFormData] = useState({
     title_field: '',
-    year_field: '',
+    date_field: '',
     desc_field: '',
     img_field: ''
   });
@@ -86,19 +86,14 @@ const Admin = () => {
 
     try {
       // Basic validation
-      if (!formData.title_field || !formData.year_field || !formData.desc_field || !formData.img_field) {
+      if (!formData.title_field || !formData.date_field || !formData.desc_field || !formData.img_field) {
         throw new Error('All fields are required');
-      }
-
-      const yearNum = parseInt(formData.year_field, 10);
-      if (isNaN(yearNum) || yearNum < 1900 || yearNum > 2100) {
-        throw new Error('Please enter a valid year between 1900 and 2100');
       }
 
       // Create the event data object
       const eventData = {
         title: formData.title_field.trim(),
-        year: yearNum,
+        event_date: formData.date_field,
         description: formData.desc_field.trim(),
         image: formData.img_field.trim()
       };
@@ -162,12 +157,12 @@ const Admin = () => {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="year_field">Year:</label>
+            <label htmlFor="date_field">Event Date:</label>
             <input
-              type="number"
-              id="year_field"
-              name="year_field"
-              value={formData.year_field}
+              type="date"
+              id="date_field"
+              name="date_field"
+              value={formData.date_field}
               onChange={handleChange}
               required
             />
