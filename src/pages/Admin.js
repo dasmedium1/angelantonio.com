@@ -57,7 +57,7 @@ const Admin = () => {
         year_field: '',
         desc_field: '',
         img_field: '',
-        pos_field: false
+        pos_field: 'right'  // Reset to default right position
       });
       setMessage('Event added successfully!');
     } catch (error) {
@@ -69,10 +69,10 @@ const Admin = () => {
   };
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: value
     }));
   };
 
