@@ -42,7 +42,7 @@ const NewsletterSignup = ({ className }) => {
               onChange={(e) => setPrivacyAccepted(e.target.checked)}
             />
             <label htmlFor="privacy-checkbox">
-              {t.privacyText} <Link to="/privacy-policy">{t.privacyLink}</Link>
+              I agree to receive newsletters and accept the <Link to="/privacy-policy">privacy policy</Link>
             </label>
           </div>
         </div>
