@@ -16,30 +16,7 @@ const Footer = () => {
           <Link to="/contact">Contact</Link>
         </div>
         
-        <div className="footer-newsletter">
-          <h3>{t.newsletterTitle}</h3>
-          <form onSubmit={handleSubmit}>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder={t.emailPlaceholder}
-              required
-            />
-            <div className="privacy-checkbox">
-              <input
-                type="checkbox"
-                id="privacy-footer"
-                checked={privacyAccepted}
-                onChange={(e) => setPrivacyAccepted(e.target.checked)}
-              />
-              <label htmlFor="privacy-footer">
-                {t.privacyText} <Link to="/privacy-policy">{t.privacyLink}</Link>
-              </label>
-            </div>
-            <button type="submit">{t.subscribeButton}</button>
-          </form>
-        </div>
+        <NewsletterSignup className="footer-newsletter" />
 
         <div className="footer-info">
           <p>&copy; 2024 Angel Antonio. All rights reserved.</p>
