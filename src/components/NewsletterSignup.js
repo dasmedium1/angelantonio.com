@@ -35,10 +35,11 @@ const NewsletterSignup = ({ className }) => {
         <div className="privacy-checkbox">
           <input
             type="checkbox"
+            id="privacy-checkbox"
             checked={privacyAccepted}
             onChange={(e) => setPrivacyAccepted(e.target.checked)}
           />
-          <label>
+          <label htmlFor="privacy-checkbox">
             {t.privacyText} <Link to="/privacy-policy">{t.privacyLink}</Link>
           </label>
         </div>
