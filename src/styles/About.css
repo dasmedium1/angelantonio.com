@@ -43,6 +43,8 @@
 .bio {
   flex: 1;
   min-width: 300px;
+  background: none;
+  color: #ffffff;
 }
 
 .bio h1 {
