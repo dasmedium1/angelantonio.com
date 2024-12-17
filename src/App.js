@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { LanguageProvider } from './context/LanguageContext';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import Home from './pages/Home';
 import History from './pages/History';
 import Live from './pages/Live';
@@ -27,6 +28,7 @@ function App() {
           <Route path="/admin" element={<Admin />} />
         </Routes>
         </div>
+        <Footer />
       </Router>
     </LanguageProvider>
   );
