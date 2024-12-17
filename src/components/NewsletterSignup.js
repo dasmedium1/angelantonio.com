@@ -31,19 +31,24 @@ const NewsletterSignup = ({ className }) => {
           onChange={(e) => setEmail(e.target.value)}
           placeholder={t.emailPlaceholder}
           required
+          className="newsletter-input"
         />
-        <div className="privacy-checkbox">
-          <input
-            type="checkbox"
-            id="privacy-checkbox"
-            checked={privacyAccepted}
-            onChange={(e) => setPrivacyAccepted(e.target.checked)}
-          />
-          <label htmlFor="privacy-checkbox">
-            {t.privacyText} <Link to="/privacy-policy">{t.privacyLink}</Link>
-          </label>
+        <div className="privacy-checkbox-container">
+          <div className="privacy-checkbox">
+            <input
+              type="checkbox"
+              id="privacy-checkbox"
+              checked={privacyAccepted}
+              onChange={(e) => setPrivacyAccepted(e.target.checked)}
+            />
+            <label htmlFor="privacy-checkbox">
+              {t.privacyText} <Link to="/privacy-policy">{t.privacyLink}</Link>
+            </label>
+          </div>
         </div>
-        <button type="submit">{t.subscribeButton}</button>
+        <button type="submit" className="newsletter-submit">
+          {t.subscribeButton}
+        </button>
       </form>
     </div>
   );

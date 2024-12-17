@@ -45,6 +45,21 @@
   gap: 15px;
   max-width: 400px;
   width: 100%;
+  align-items: flex-start;
+}
+
+.newsletter-input {
+  width: 100%;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.privacy-checkbox-container {
+  width: 100%;
 }
 
 .footer-newsletter input[type="email"] {
@@ -61,18 +76,15 @@
   gap: 10px;
   font-size: 0.9rem;
   text-align: left;
-  margin: 15px 0;
+  margin: 10px 0;
   width: 100%;
   color: #ffffff;
-  position: relative;
-  padding-left: 25px;
 }
 
 .privacy-checkbox input[type="checkbox"] {
-  position: absolute;
-  left: 0;
-  top: 4px;
-  margin: 0;
+  margin-top: 3px;
+  margin-right: 8px;
+  cursor: pointer;
 }
 
 .privacy-checkbox input[type="checkbox"] {
