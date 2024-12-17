@@ -1,14 +1,36 @@
 .about-page {
+  min-height: 100vh;
+  background: url('/images/hero-bg-2.JPG') no-repeat center center;
+  background-size: cover;
+  position: relative;
   padding: 2rem;
-  max-width: 1200px;
-  margin: 80px auto 0; /* Added top margin */
+  margin: 0;
+}
+
+.about-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1;
 }
 
 .about-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 80px auto 0;
   display: flex;
   gap: 2rem;
   align-items: flex-start;
   flex-wrap: wrap;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  padding: 2rem;
+  border-radius: 10px;
 }
 
 .artist-image {
