@@ -23,25 +23,15 @@
   gap: 2rem;
 }
 
-.nav-logo {
-  height: 30px;
+.nav-brand {
+  text-decoration: none;
   display: flex;
   align-items: center;
-  text-decoration: none;
 }
 
-.logo-image {
-  height: 100%;
+.brand-logo {
+  height: 40px;
   width: auto;
-  object-fit: contain;
-}
-
-.nav-brand a {
-  color: #ffffff;
-  text-decoration: none;
-  font-size: 2rem;
-  font-weight: 700;
-  letter-spacing: 4px;
 }
 
 .nav-menu {

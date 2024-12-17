@@ -26,8 +26,8 @@ const Navbar = () => {
   return (
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="nav-left">
-        <Link to="/" className="nav-logo">
-          <img src="/images/nombre-wht.png" alt="Angel Antonio" className="logo-image" />
+        <Link to="/" className="nav-brand">
+          <img src="/images/nombre-wht.png" alt="Angel Antonio" className="brand-logo" />
         </Link>
         <div className={`nav-menu ${isOpen ? 'active' : ''}`}>
           <Link to="/" className="nav-item">{t.home}</Link>
