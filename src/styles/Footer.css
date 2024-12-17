@@ -82,14 +82,11 @@
 }
 
 .privacy-checkbox input[type="checkbox"] {
-  margin-top: 3px;
-  margin-right: 8px;
-  cursor: pointer;
-}
-
-.privacy-checkbox input[type="checkbox"] {
   margin-top: 4px;
+  margin-right: 8px;
+  flex-shrink: 0;
   cursor: pointer;
+  align-self: flex-start;
 }
 
 .privacy-checkbox label {
