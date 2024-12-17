@@ -1,24 +1,9 @@
-import React, { useState, useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { LanguageContext } from '../context/LanguageContext';
-import { translations } from '../translations';
+import NewsletterSignup from './NewsletterSignup';
 import '../styles/Footer.css';
 
 const Footer = () => {
-  const [email, setEmail] = useState('');
-  const [privacyAccepted, setPrivacyAccepted] = useState(false);
-  const { language } = useContext(LanguageContext);
-  const t = translations[language].live;
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!privacyAccepted) {
-      alert('Please accept the privacy policy to continue');
-      return;
-    }
-    // Add newsletter signup logic here
-    console.log('Newsletter signup:', email);
-  };
 
   return (
     <footer className="footer">
