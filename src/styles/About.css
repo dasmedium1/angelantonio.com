@@ -1,6 +1,6 @@
 .about-page {
   min-height: 100vh;
-  background: url('/images/hero-bg-2.JPG') no-repeat center center;
+  background: url('../images/hero-bg-2.JPG') no-repeat center center;
   background-size: cover;
   position: relative;
   padding: 2rem;
