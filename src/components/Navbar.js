@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { FaFacebook, FaInstagram, FaYoutube, FaSpotify } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaYoutube, FaTiktok } from "react-icons/fa";
 import { LanguageContext } from "../context/LanguageContext";
 import { translations } from "../translations";
 import "../styles/Navbar.css";
@@ -76,11 +76,11 @@ const Navbar = () => {
             <FaYoutube />
           </a>
           <a
-            href="https://spotify.com"
+            href="https://tiktok.com/@angelantonio.music"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <FaSpotify />
+            <FaTiktok />
           </a>
         </div>
 
