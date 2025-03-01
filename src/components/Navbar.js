@@ -62,7 +62,7 @@ const Navbar = () => {
             <FaFacebook />
           </a>
           <a
-            href="https://instagram.com"
+            href="https://www.instagram.com/angelantonio.music/"
             target="_blank"
             rel="noopener noreferrer"
           >
