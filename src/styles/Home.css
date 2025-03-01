@@ -32,24 +32,6 @@
   letter-spacing: 6px;
 }
 
-.cta-button {
-  padding: 1.5rem 4rem;
-  font-size: 1.4rem;
-  background-color: transparent;
-  border: 2px solid #ffffff;
-  color: white;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 4px;
-  position: relative;
-  overflow: hidden;
-}
-
-.cta-button:hover {
-  background-color: #ffffff;
-  color: #000000;
-}
 
 .nav-item:hover {
   color: #ffffff;

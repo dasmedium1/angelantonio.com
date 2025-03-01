@@ -7,7 +7,6 @@ const Home = () => {
       <div className="hero">
         <h1>Angel Antonio</h1>
         <p>Zeit Tour 2024</p>
-        <button className="cta-button">Tickets</button>
       </div>
     </div>
   );
