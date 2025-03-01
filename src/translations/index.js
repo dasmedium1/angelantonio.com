@@ -17,7 +17,7 @@ export const translations = {
       newsletterTitle: "",
     },
     home: {
-      tourText: "Zeit Tour 2024",
+      tourText: "Sin Bajarle Desde Uff",
       ticketsButton: "Tickets",
       latestRelease: "Latest Release",
       streamNow: "Stream it now on all platforms",
@@ -42,7 +42,7 @@ export const translations = {
       newsletterTitle: "",
     },
     home: {
-      tourText: "Gira Zeit 2024",
+      tourText: "Sin Bajarle Desde Uff",
       ticketsButton: "Entradas",
       latestRelease: "Último Lanzamiento",
       streamNow: "Disponible en todas las plataformas",
