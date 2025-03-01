@@ -55,7 +55,7 @@ const Navbar = () => {
       <div className="nav-right">
         <div className="social-links">
           <a
-            href="https://facebook.com"
+            href="https://www.facebook.com/angelantonio.music"
             target="_blank"
             rel="noopener noreferrer"
           >
