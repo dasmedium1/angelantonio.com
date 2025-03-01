@@ -76,7 +76,7 @@ const Navbar = () => {
             <FaYoutube />
           </a>
           <a
-            href="https://tiktok.com/@angelantonio.music"
+            href="https://www.tiktok.com/@angelantonio.music"
             target="_blank"
             rel="noopener noreferrer"
           >
