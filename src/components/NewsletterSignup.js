@@ -1,10 +1,10 @@
-import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { LanguageContext } from '../context/LanguageContext';
-import { translations } from '../translations';
+import React, { useState, useContext } from "react";
+import { Link } from "react-router-dom";
+import { LanguageContext } from "../context/LanguageContext";
+import { translations } from "../translations";
 
 const NewsletterSignup = ({ className }) => {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const [privacyAccepted, setPrivacyAccepted] = useState(false);
   const { language } = useContext(LanguageContext);
   const t = translations[language].live;
@@ -12,12 +12,12 @@ const NewsletterSignup = ({ className }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!privacyAccepted) {
-      alert('Please accept the privacy policy to continue');
+      alert("Please accept the privacy policy to continue");
       return;
     }
     // Add newsletter signup logic here
-    console.log('Newsletter signup:', email);
-    setEmail('');
+    console.log("Newsletter signup:", email);
+    setEmail("");
     setPrivacyAccepted(false);
   };
 
@@ -42,7 +42,8 @@ const NewsletterSignup = ({ className }) => {
               onChange={(e) => setPrivacyAccepted(e.target.checked)}
             />
             <label htmlFor="privacy-checkbox">
-              I agree to receive newsletters and accept the <Link to="/privacy-policy">privacy policy</Link>
+              I have read and accepted the{" "}
+              <Link to="/privacy-policy">privacy policy</Link>
             </label>
           </div>
         </div>
