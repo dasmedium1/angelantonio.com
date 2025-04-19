@@ -1,5 +1,6 @@
 .aider*
-# .env
-node_modules
-# .env*
+.env*
 !.env.example
+node_modules
+dist
+build
