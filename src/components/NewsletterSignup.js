@@ -21,16 +21,39 @@ const NewsletterSignup = ({ className }) => {
   const { language } = useContext(LanguageContext);
   const t = translations[language].live;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!privacyAccepted) {
-      alert("Please accept the privacy policy to continue");
+    if (!privacyAccepted || !recaptchaReady) {
+      alert(t.errors?.privacyOrCaptcha || "Please accept the privacy policy and verify you're not a robot");
       return;
     }
-    // Add newsletter signup logic here
-    console.log("Newsletter signup:", email);
-    setEmail("");
-    setPrivacyAccepted(false);
+
+    let token;
+    try {
+      token = await window.grecaptcha.execute(
+        process.env.REACT_APP_RECAPTCHA_SITE_KEY,
+        { action: 'subscribe' }
+      );
+    } catch (err) {
+      alert(t.errors?.captchaFailed || "Failed to verify reCAPTCHA");
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, token }),
+      });
+
+      if (!response.ok) throw new Error("Subscription failed");
+      
+      alert(t.success || "Subscribed successfully!");
+      setEmail("");
+      setPrivacyAccepted(false);
+    } catch (error) {
+      alert(t.errors?.subscriptionFailed || "Subscription failed, please try again");
+    }
   };
 
   return (
