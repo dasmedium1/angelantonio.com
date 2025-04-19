@@ -1,9 +1,21 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { loadScript } from "react-loader-spinner"; // Or any script loader
 import { Link } from "react-router-dom";
 import { LanguageContext } from "../context/LanguageContext";
 import { translations } from "../translations";
 
 const NewsletterSignup = ({ className }) => {
+  const [recaptchaReady, setRecaptchaReady] = useState(false);
+
+  useEffect(() => {
+    const loadRecaptcha = () => {
+      const script = document.createElement('script');
+      script.src = `https://www.google.com/recaptcha/api.js?render=${process.env.REACT_APP_RECAPTCHA_SITE_KEY}`;
+      script.onload = () => setRecaptchaReady(true);
+      document.body.appendChild(script);
+    };
+    loadRecaptcha();
+  }, []);
   const [email, setEmail] = useState("");
   const [privacyAccepted, setPrivacyAccepted] = useState(false);
   const { language } = useContext(LanguageContext);
