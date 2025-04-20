@@ -7,31 +7,15 @@ export default async (req, res) => {
 
   const { email, token } = req.body;
 
-  // Verify reCAPTCHA Enterprise
-  const verification = await fetch(
-    `https://recaptchaenterprise.googleapis.com/v1/projects/${process.env.GOOGLE_CLOUD_PROJECT}/assessments?key=${process.env.REACT_APP_RECAPTCHA_SITE_KEY}`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        event: {
-          token,
-          siteKey: process.env.REACT_APP_RECAPTCHA_SITE_KEY,
-          expectedAction: 'subscribe'
-        }
-      })
-    }
+  // Verify reCAPTCHA v3
+  const captchaResponse = await fetch(
+    `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${token}`,
+    { method: 'POST' }
   );
+  const captchaData = await captchaResponse.json();
 
-  if (!verification.ok) {
+  if (!captchaData.success || captchaData.score < 0.5) {
     return res.status(400).json({ error: 'reCAPTCHA verification failed' });
-  }
-
-  const { riskAnalysis } = await verification.json();
-  if (riskAnalysis.score < 0.5) {
-    return res.status(400).json({ error: 'reCAPTCHA risk score too low' });
   }
 
   // Proceed with MailerLite

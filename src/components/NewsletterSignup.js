@@ -10,7 +10,7 @@ const NewsletterSignup = ({ className }) => {
   useEffect(() => {
     const loadRecaptcha = () => {
       const script = document.createElement('script');
-      script.src = `https://www.google.com/recaptcha/enterprise.js?render=${process.env.REACT_APP_RECAPTCHA_SITE_KEY}`;
+      script.src = `https://www.google.com/recaptcha/api.js?render=${process.env.REACT_APP_RECAPTCHA_SITE_KEY}`;
       script.onload = () => setRecaptchaReady(true);
       document.body.appendChild(script);
     };
@@ -30,7 +30,7 @@ const NewsletterSignup = ({ className }) => {
 
     let token;
     try {
-      token = await window.grecaptcha.enterprise.execute(
+      token = await window.grecaptcha.execute(
         process.env.REACT_APP_RECAPTCHA_SITE_KEY,
         { action: 'subscribe' }
       );
