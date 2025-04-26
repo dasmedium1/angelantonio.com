@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { loadScript } from "react-loader-spinner"; // Or any script loader
+// import { loadScript } from "react-loader-spinner"; // Or any script loader
 import { Link } from "react-router-dom";
 import { LanguageContext } from "../context/LanguageContext";
 import { translations } from "../translations";
@@ -9,7 +9,7 @@ const NewsletterSignup = ({ className }) => {
 
   useEffect(() => {
     const loadRecaptcha = () => {
-      const script = document.createElement('script');
+      const script = document.createElement("script");
       script.src = `https://www.google.com/recaptcha/api.js?render=${process.env.REACT_APP_RECAPTCHA_SITE_KEY}`;
       script.onload = () => setRecaptchaReady(true);
       document.body.appendChild(script);
@@ -24,7 +24,10 @@ const NewsletterSignup = ({ className }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!privacyAccepted || !recaptchaReady) {
-      alert(t.errors?.privacyOrCaptcha || "Please accept the privacy policy and verify you're not a robot");
+      alert(
+        t.errors?.privacyOrCaptcha ||
+          "Please accept the privacy policy and verify you're not a robot"
+      );
       return;
     }
 
@@ -32,7 +35,7 @@ const NewsletterSignup = ({ className }) => {
     try {
       token = await window.grecaptcha.execute(
         process.env.REACT_APP_RECAPTCHA_SITE_KEY,
-        { action: 'subscribe' }
+        { action: "subscribe" }
       );
     } catch (err) {
       alert(t.errors?.captchaFailed || "Failed to verify reCAPTCHA");
@@ -47,12 +50,14 @@ const NewsletterSignup = ({ className }) => {
       });
 
       if (!response.ok) throw new Error("Subscription failed");
-      
+
       alert(t.success || "Subscribed successfully!");
       setEmail("");
       setPrivacyAccepted(false);
     } catch (error) {
-      alert(t.errors?.subscriptionFailed || "Subscription failed, please try again");
+      alert(
+        t.errors?.subscriptionFailed || "Subscription failed, please try again"
+      );
     }
   };
 

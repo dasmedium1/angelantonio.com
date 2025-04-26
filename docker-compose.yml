@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   frontend:
@@ -10,8 +10,7 @@ services:
     volumes:
       - ./src:/app/src
       - ./public:/app/public
-    env_file:
-      - .env.docker
+    env_file: .env.docker
     environment:
       - REACT_APP_POCKETBASE_URL=http://pocketbase:${PB_PORT}
       - REACT_APP_RECAPTCHA_SITE_KEY=${RECAPTCHA_SITE_KEY}
@@ -27,6 +26,7 @@ services:
     volumes:
       - pocketbase_data:/pb/pb_data
       - pb_config:/pb/pb-config
+    env_file: .env.docker
     healthcheck:
       test: ["CMD", "wget", "--spider", "http://localhost:8090/api/health"]
       interval: 10s
